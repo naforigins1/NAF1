@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAF | معايدة العيد</title>
+    
+    <!-- خطوط جوجل: اختيار خطوط راقية تعكس الفخامة والبساطة -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;400;600&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة التقاط الشاشة لتحويل التصميم لصورة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --naf-beige: #F4EBD9; /* اللون البيج من هويتكم */
+            --naf-dark: #1A1A1A;  /* اللون الأسود الفخم */
+            --border-light: #E2DED5;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background-color: #fafafa;
+            color: var(--naf-dark);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* واجهة التحكم */
+        .controls {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            z-index: 10;
+        }
+
+        h1 { font-weight: 600; font-size: 20px; margin-bottom: 20px; text-align: center; letter-spacing: 1px; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--naf-dark); }
+
+        .btn-download {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--naf-dark);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 400;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* منطقة البطاقة - تم تصميمها لتطابق الهوية المرفقة */
+        .card-wrapper {
+            position: relative;
+            width: 360px; /* حجم عرض مناسب للجوال */
+            height: 600px; /* نسبة طولية تشبه البوستر */
+            background-color: var(--naf-beige);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        #capture-area {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px 30px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* خطوط الزينة المينيمال من الهوية */
+        .decorative-line {
+            position: absolute;
+            width: 1px;
+            background-color: var(--naf-dark);
+            height: 100px;
+            top: 150px;
+        }
+        .line-left { left: 40px; }
+        .line-right { right: 40px; }
+
+        .header-texts {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 200;
+        }
+
+        .main-content {
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #display-name {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--naf-dark);
+            margin: 0;
+            border-bottom: 1px solid var(--naf-dark);
+            padding-bottom: 10px;
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        .eid-wish {
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .footer {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            font-size: 22px;
+            letter-spacing: 8px;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            font-size: 10px;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+
+        /* لضمان جودة الصورة عند التحميل */
+        canvas { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <h1>NAF EXPERIENCE</h1>
+        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا..." maxlength="25">
+        
+        <select id="themeSelect">
+            <option value="classic">القالب الكلاسيكي (بيج)</option>
+            <option value="dark">القالب المودرن (أبيض)</option>
+        </select>
+
+        <button class="btn-download" onclick="downloadImage()">تحميل التهنئة 🤍</button>
+    </div>
+
+    <!-- منطقة البطاقة التي سيتم تحويلها لصورة -->
+    <div class="card-wrapper" id="card">
+        <div id="capture-area">
+            <!-- خطوط الهوية -->
+            <div class="decorative-line line-left"></div>
+            <div class="decorative-line line-right"></div>
+
+            <div class="header-texts">
+                <span>We are serve</span>
+                <span>نحن نخدم</span>
+            </div>
+
+            <div class="main-content">
+                <p style="font-size: 12px; margin-bottom: 0;">تهنئة خاصة لـ</p>
+                <h2 id="display-name">الاسم هنا</h2>
+                <div class="eid-wish">
+                    أصبحت فرحة العيد تكتمل بوجودكم<br>
+                    كل عام وأنتم بخير وعساكم من عواده
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="contact-info">
+                    للطلب والاستفسار<br>
+                    +966556836368
+                </div>
+                <div class="brand-logo">N A F</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const displayName = document.getElementById('display-name');
+        const themeSelect = document.getElementById('themeSelect');
+        const captureArea = document.getElementById('capture-area');
+
+        // تحديث الاسم لحظياً
+        nameInput.addEventListener('input', (e) => {
+            displayName.innerText = e.target.value || "الاسم هنا";
+        });
+
+        // تغيير الثيم (مثال بسيط لتغيير الألوان)
+        themeSelect.addEventListener('change', (e) => {
+            if(e.target.value === 'dark') {
+                captureArea.style.backgroundColor = "#ffffff";
+            } else {
+                captureArea.style.backgroundColor = "#F4EBD9";
+            }
+        });
+
+        // وظيفة التحميل
+        function downloadImage() {
+            const btn = document.querySelector('.btn-download');
+            btn.innerText = "جاري التحضير...";
+            
+            html2canvas(document.querySelector("#capture-area"), {
+                scale: 3, // لزيادة الجودة لتصبح احترافية جداً
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'NAF-Eid-Greeting.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                btn.innerText = "تحميل التهنئة 🤍";
+            });
+        }
+    </script>
+</body>
+</html>
