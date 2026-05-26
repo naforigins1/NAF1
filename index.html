@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAF | معايدة العيد</title>
+    <title>NAF التحديث الجديد</title>
     
-    <!-- خطوط مخصصة تعكس الفخامة والبساطة للهوية -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Reem+Kufi:wght@500&display=swap" rel="stylesheet">
-    
-    <!-- مكتبة التقاط الشاشة المحدثة لضمان جودة عالية جداً -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
@@ -29,7 +26,6 @@
             padding: 20px;
         }
 
-        /* واجهة التحكم */
         .controls {
             width: 100%;
             max-width: 380px;
@@ -41,7 +37,7 @@
             z-index: 10;
         }
 
-        h1 { font-weight: 600; font-size: 18px; margin-bottom: 20px; text-align: center; letter-spacing: 1px; }
+        h1 { font-weight: 600; font-size: 18px; margin-bottom: 20px; text-align: center; }
 
         input, select {
             width: 100%;
@@ -54,8 +50,6 @@
             outline: none;
             box-sizing: border-box;
         }
-
-        input:focus { border-color: var(--dark); }
 
         .btn-download {
             width: 100%;
@@ -70,9 +64,6 @@
             transition: 0.3s;
         }
 
-        .btn-download:hover { opacity: 0.9; }
-
-        /* منطقة البطاقة - محاكاة لتوزيع بوستر إنتاج */
         .card-wrapper {
             position: relative;
             width: 360px; 
@@ -82,22 +73,19 @@
             border-radius: 4px;
         }
 
-        /* القالب الكلاسيكي الافتراضي (بيج والخط أسود) */
         #capture-area {
             width: 100%;
             height: 100%;
-            background-color: var(--beige);
-            color: var(--dark);
+            background-color: #F4EBD9; /* بيج افتراضي */
+            color: #1A1A1A; /* أسود افتراضي */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             padding: 40px 30px;
             box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* إطار داخلي ناعم مثل البوستر المرفق */
         .inner-frame {
             position: absolute;
             top: 20px;
@@ -110,11 +98,9 @@
             pointer-events: none;
         }
 
-        /* الشعار في الأعلى بدون مسافات */
         .brand-logo-top {
             font-size: 24px;
             font-weight: 600;
-            letter-spacing: 0px; 
             margin-top: 10px;
         }
 
@@ -127,24 +113,19 @@
             gap: 15px;
         }
 
-        /* مخطوطة العيد الوسطى */
         .eid-title {
             font-family: 'Reem Kufi', sans-serif;
             font-size: 38px;
             font-weight: 500;
             margin: 0;
-            line-height: 1.2;
         }
 
         .eid-wish {
             font-size: 15px;
             line-height: 1.8;
             font-weight: 300;
-            max-width: 90%;
-            margin: 0 auto;
         }
 
-        /* خانة الاسم السفلية الأنيقة */
         .name-container {
             width: 85%;
             border: 1px solid currentColor;
@@ -160,15 +141,11 @@
             font-size: 18px;
             font-weight: 400;
             margin: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .footer-note {
             font-size: 10px;
             opacity: 0.5;
-            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -186,17 +163,13 @@
         <button class="btn-download" onclick="downloadImage()">تحميل التهنئة ✨</button>
     </div>
 
-    <!-- منطقة البطاقة المخصصة لـ NAF -->
     <div class="card-wrapper">
         <div id="capture-area">
             <div class="inner-frame"></div>
-
-            <!-- الاسم فوق بدون مسافات -->
             <div class="brand-logo-top">NAF</div>
 
             <div class="main-content">
                 <h2 class="eid-title">عيدكم مبارك</h2>
-                
                 <div class="eid-wish">
                     <span style="font-weight: 600; font-size: 17px; display: block; margin-bottom: 5px;">كل عام وأنتم بخير</span>
                     تقبل الله منا ومنكم صالح الأعمال<br>
@@ -204,7 +177,6 @@
                 </div>
             </div>
 
-            <!-- حقل الاسم السفلي التفاعلي المصمم بدقة -->
             <div class="name-container">
                 <h3 id="display-name">الاسم هنا</h3>
             </div>
@@ -219,23 +191,22 @@
         const themeSelect = document.getElementById('themeSelect');
         const captureArea = document.getElementById('capture-area');
 
-        // تحديث الاسم بشكل فوري عند الكتابة
         nameInput.addEventListener('input', (e) => {
             displayName.innerText = e.target.value || "الاسم هنا";
         });
 
-        // التحكم الفوري في الألوان والخطوط (تم تصحيح الخطأ الإملائي هنا)
+        // تغيير الثيم المضمون 100% بدون أخطاء إملائية
         themeSelect.addEventListener('change', (e) => {
             if(e.target.value === 'modern') {
-                captureArea.style.backgroundColor = "#1A1A1A";
-                captureArea.style.color = "#F4EBD9";
+                captureArea.style.setProperty('background-color', '#1A1A1A', 'important');
+                captureArea.style.setProperty('color', '#F4EBD9', 'important');
             } else {
-                captureArea.style.backgroundColor = "#F4EBD9";
-                captureArea.style.color = "#1A1A1A";
+                captureArea.style.setProperty('background-color', '#F4EBD9', 'important');
+                captureArea.style.setProperty('color', '#1A1A1A', 'important');
             }
         });
 
-        // تحسين دالة التحميل وتوافقيتها العالية مع أجهزة الماك والجوالات
+        // دالة التحميل المحدثة والقوية جداً
         function downloadImage() {
             const btn = document.querySelector('.btn-download');
             btn.innerText = "جاري الحفظ...";
@@ -244,9 +215,9 @@
             
             html2canvas(target, {
                 scale: 3, 
+                logging: false,
                 useCORS: true,
-                allowTaint: true,
-                backgroundColor: null
+                allowTaint: true
             }).then(canvas => {
                 const imgData = canvas.toDataURL("image/png");
                 const link = document.createElement('a');
@@ -255,15 +226,14 @@
                 link.download = NAF_Eid_${userTitle}.png;
                 link.href = imgData;
                 
-                // إجبار المتصفح على بدء التحميل الفوري
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 
                 btn.innerText = "تحميل التهنئة ✨";
             }).catch(err => {
-                console.error("خطأ أثناء التحميل:", err);
-                btn.innerText = "فشل التحميل، جربي ثانية";
+                alert("اضغطي مطولاً على الصورة لحفظها إذا لم تبدأ تلقائياً");
+                btn.innerText = "تحميل التهنئة ✨";
             });
         }
     </script>
