@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NAF</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+
+body{
+    font-family:'IBM Plex Sans Arabic',sans-serif;
+    background:#fafafa;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+}
+
+.controls{
+    width:100%;
+    max-width:360px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom:20px;
+    box-sizing:border-box;
+}
+
+input,select,button{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+    font-family:inherit;
+    font-size:14px;
+}
+
+button{
+    background:#1A1A1A;
+    color:white;
+    cursor:pointer;
+    border:none;
+    font-weight:600;
+    transition:0.2s;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+.card-wrapper{
+    width:360px;
+    height:600px;
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+#capture-area{
+    width:100%;
+    height:100%;
+    padding:40px 30px;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+    transition:0.3s;
+}
+
+/* كلاسيك */
+.theme-classic{
+    background:#F4EBD9;
+    color:#1A1A1A;
+}
+
+/* مودرن */
+.theme-modern{
+    background:#1A1A1A;
+    color:#F4EBD9;
+}
+
+.inner-frame{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+    bottom:15px;
+    border:1px solid currentColor;
+    opacity:0.15;
+    border-radius:12px;
+    pointer-events:none;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:600;
+    margin-top:10px;
+    z-index:2;
+}
+
+.content{
+    text-align:center;
+    z-index:2;
+}
+
+.title{
+    font-size:38px;
+    margin:0 0 15px;
+    font-weight:600;
+}
+
+.wish{
+    font-size:15px;
+    line-height:2;
+    font-weight:300;
+}
+
+.name-box{
+    width:85%;
+    border:1px solid currentColor;
+    padding:12px;
+    border-radius:30px;
+    text-align:center;
+    margin-bottom:15px;
+    background:rgba(255,255,255,0.03);
+    z-index:2;
+}
+
+#display-name{
+    font-size:18px;
+    margin:0;
+}
+
+.footer{
+    font-size:11px;
+    opacity:0.5;
+    z-index:2;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="controls">
+
+<h2 style="text-align:center;margin-top:0;font-size:18px;">
+NAF
+</h2>
+
+<input type="text"
+id="nameInput"
+placeholder="اكتب اسمك هنا..."
+maxlength="30">
+
+<select id="themeSelect">
+<option value="classic">القالب الكلاسيكي (بيج × أسود)</option>
+<option value="modern">القالب المودرن (أسود × بيج)</option>
+</select>
+
+<button onclick="downloadImage()">
+تحميل التهنئة ✨
+</button>
+
+</div>
+
+<div class="card-wrapper">
+
+<div id="capture-area" class="theme-classic">
+
+<div class="inner-frame"></div>
+
+<div class="logo">NAF</div>
+
+<div class="content">
+
+<h1 class="title">
+عيدكم مبارك
+</h1>
+
+<div class="wish">
+
+<span style="font-weight:600;display:block;margin-bottom:5px;">
+كل عام وأنتم بخير
+</span>
+
+تقبل الله منا ومنكم صالح الأعمال<br>
+وجعل أيامكم أفراحاً ومسرات
+
+</div>
+
+</div>
+
+<div class="name-box">
+<p id="display-name">الاسم هنا</p>
+</div>
+
+<div class="footer">
+NAF
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const nameInput = document.getElementById('nameInput');
+const displayName = document.getElementById('display-name');
+const themeSelect = document.getElementById('themeSelect');
+const captureArea = document.getElementById('capture-area');
+
+nameInput.addEventListener('input', () => {
+
+    displayName.textContent =
+    nameInput.value.trim() || 'الاسم هنا';
+
+});
+
+themeSelect.addEventListener('change', () => {
+
+    captureArea.classList.remove(
+        'theme-classic',
+        'theme-modern'
+    );
+
+    captureArea.classList.add(
+        themeSelect.value === 'modern'
+        ? 'theme-modern'
+        : 'theme-classic'
+    );
+
+});
+
+function downloadImage(){
+
+    html2canvas(captureArea,{
+        scale:4,
+        useCORS:true,
+        backgroundColor:null
+    })
+
+    .then(canvas => {
+
+        const link = document.createElement('a');
+
+        const fileName =
+        nameInput.value.trim()
+        ? NAF_${nameInput.value.trim()}.png
+        : 'NAF.png';
+
+        link.download = fileName;
+
+        link.href = canvas.toDataURL('image/png');
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+    })
+
+    .catch(() => {
+
+        alert('صار خطأ بالتحميل، جرب مرة ثانية');
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
