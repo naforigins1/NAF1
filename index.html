@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NAF</title>
@@ -12,161 +15,297 @@
 
 <style>
 
-body{
-    font-family:'IBM Plex Sans Arabic',sans-serif;
-    background:#fafafa;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:20px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
+
+body{
+
+    font-family:'IBM Plex Sans Arabic',sans-serif;
+
+    background:#fafafa;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding:20px;
+
+}
+
+/* لوحة التحكم */
 
 .controls{
+
     width:100%;
+
     max-width:360px;
+
     background:white;
+
     padding:20px;
-    border-radius:10px;
+
+    border-radius:12px;
+
     box-shadow:0 4px 15px rgba(0,0,0,0.05);
+
     margin-bottom:20px;
-    box-sizing:border-box;
+
 }
 
-input,select,button{
+.controls h2{
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+    font-size:20px;
+
+    font-weight:600;
+
+}
+
+input,
+select,
+button{
+
     width:100%;
+
     padding:12px;
-    margin-bottom:10px;
+
+    margin-bottom:12px;
+
     border-radius:8px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
+
+    border:1px solid #dcdcdc;
+
     font-family:inherit;
+
     font-size:14px;
+
 }
 
 button{
+
     background:#1A1A1A;
+
     color:white;
-    cursor:pointer;
+
     border:none;
+
+    cursor:pointer;
+
     font-weight:600;
+
     transition:0.2s;
+
 }
 
 button:hover{
-    opacity:0.9;
+
+    opacity:0.92;
+
 }
+
+/* الكرت */
 
 .card-wrapper{
+
     width:360px;
+
     height:600px;
-    position:relative;
+
+    border-radius:16px;
+
     overflow:hidden;
-    border-radius:14px;
+
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
 }
 
+/* المنطقة اللي تنحفظ */
+
 #capture-area{
+
     width:100%;
+
     height:100%;
+
     padding:40px 30px;
-    box-sizing:border-box;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:space-between;
+
     align-items:center;
+
     position:relative;
-    transition:0.3s;
+
+    transition:0.3s ease;
+
 }
 
 /* كلاسيك */
+
 .theme-classic{
+
     background:#F4EBD9;
+
     color:#1A1A1A;
+
 }
 
 /* مودرن */
+
 .theme-modern{
+
     background:#1A1A1A;
+
     color:#F4EBD9;
+
 }
+
+/* الإطار الداخلي */
 
 .inner-frame{
+
     position:absolute;
+
     top:15px;
+
     left:15px;
+
     right:15px;
+
     bottom:15px;
+
     border:1px solid currentColor;
+
     opacity:0.15;
-    border-radius:12px;
+
+    border-radius:14px;
+
     pointer-events:none;
+
 }
+
+/* اللوقو */
 
 .logo{
+
     font-size:28px;
+
     font-weight:600;
+
     margin-top:10px;
+
     z-index:2;
+
 }
 
+/* المحتوى */
+
 .content{
+
     text-align:center;
+
     z-index:2;
+
 }
 
 .title{
+
     font-size:38px;
-    margin:0 0 15px;
+
+    margin-bottom:15px;
+
     font-weight:600;
+
 }
 
 .wish{
+
     font-size:15px;
+
     line-height:2;
+
     font-weight:300;
+
 }
 
+/* الاسم */
+
 .name-box{
+
     width:85%;
+
     border:1px solid currentColor;
+
     padding:12px;
+
     border-radius:30px;
+
     text-align:center;
-    margin-bottom:15px;
+
     background:rgba(255,255,255,0.03);
+
     z-index:2;
+
 }
 
 #display-name{
+
     font-size:18px;
-    margin:0;
+
 }
 
+/* الفوتر */
+
 .footer{
+
     font-size:11px;
+
     opacity:0.5;
+
     z-index:2;
+
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- التحكم -->
+
 <div class="controls">
 
-<h2 style="text-align:center;margin-top:0;font-size:18px;">
-NAF
-</h2>
+<h2>NAF</h2>
 
-<input type="text"
+<input
+type="text"
 id="nameInput"
 placeholder="اكتب اسمك هنا..."
-maxlength="30">
+maxlength="30"
+>
 
 <select id="themeSelect">
-<option value="classic">القالب الكلاسيكي (بيج × أسود)</option>
-<option value="modern">القالب المودرن (أسود × بيج)</option>
+
+<option value="classic">
+القالب الكلاسيكي (بيج × أسود)
+</option>
+
+<option value="modern">
+القالب المودرن (أسود × بيج)
+</option>
+
 </select>
 
 <button onclick="downloadImage()">
@@ -175,13 +314,17 @@ maxlength="30">
 
 </div>
 
+<!-- الكرت -->
+
 <div class="card-wrapper">
 
 <div id="capture-area" class="theme-classic">
 
 <div class="inner-frame"></div>
 
-<div class="logo">NAF</div>
+<div class="logo">
+NAF
+</div>
 
 <div class="content">
 
@@ -191,7 +334,7 @@ maxlength="30">
 
 <div class="wish">
 
-<span style="font-weight:600;display:block;margin-bottom:5px;">
+<span style="font-weight:600;display:block;margin-bottom:6px;">
 كل عام وأنتم بخير
 </span>
 
@@ -203,7 +346,11 @@ maxlength="30">
 </div>
 
 <div class="name-box">
-<p id="display-name">الاسم هنا</p>
+
+<p id="display-name">
+الاسم هنا
+</p>
+
 </div>
 
 <div class="footer">
@@ -216,53 +363,103 @@ NAF
 
 <script>
 
-const nameInput = document.getElementById('nameInput');
-const displayName = document.getElementById('display-name');
-const themeSelect = document.getElementById('themeSelect');
-const captureArea = document.getElementById('capture-area');
+/* العناصر */
 
-nameInput.addEventListener('input', () => {
+const nameInput =
+document.getElementById('nameInput');
 
-    displayName.textContent =
-    nameInput.value.trim() || 'الاسم هنا';
+const displayName =
+document.getElementById('display-name');
+
+const themeSelect =
+document.getElementById('themeSelect');
+
+const captureArea =
+document.getElementById('capture-area');
+
+
+/* تحديث الاسم */
+
+nameInput.addEventListener('input', function(){
+
+    const value =
+    nameInput.value.trim();
+
+    if(value === ''){
+
+        displayName.textContent =
+        'الاسم هنا';
+
+    } else {
+
+        displayName.textContent =
+        value;
+
+    }
 
 });
 
-themeSelect.addEventListener('change', () => {
+
+/* تغيير الثيم */
+
+themeSelect.addEventListener('change', function(){
 
     captureArea.classList.remove(
-        'theme-classic',
+        'theme-classic'
+    );
+
+    captureArea.classList.remove(
         'theme-modern'
     );
 
-    captureArea.classList.add(
-        themeSelect.value === 'modern'
-        ? 'theme-modern'
-        : 'theme-classic'
-    );
+    if(themeSelect.value === 'modern'){
+
+        captureArea.classList.add(
+            'theme-modern'
+        );
+
+    } else {
+
+        captureArea.classList.add(
+            'theme-classic'
+        );
+
+    }
 
 });
+
+
+/* تحميل الصورة */
 
 function downloadImage(){
 
     html2canvas(captureArea,{
+
         scale:4,
+
         useCORS:true,
+
+        allowTaint:true,
+
         backgroundColor:null
+
     })
 
-    .then(canvas => {
+    .then(function(canvas){
 
-        const link = document.createElement('a');
+        const image =
+        canvas.toDataURL('image/png');
 
-        const fileName =
-        nameInput.value.trim()
-        ? NAF_${nameInput.value.trim()}.png
-        : 'NAF.png';
+        const link =
+        document.createElement('a');
 
-        link.download = fileName;
+        const userName =
+        nameInput.value.trim() || 'NAF';
 
-        link.href = canvas.toDataURL('image/png');
+        link.href = image;
+
+        link.download =
+        userName + '.png';
 
         document.body.appendChild(link);
 
@@ -272,9 +469,11 @@ function downloadImage(){
 
     })
 
-    .catch(() => {
+    .catch(function(error){
 
-        alert('صار خطأ بالتحميل، جرب مرة ثانية');
+        console.log(error);
+
+        alert('صار خطأ بالتحميل');
 
     });
 
@@ -283,4 +482,5 @@ function downloadImage(){
 </script>
 
 </body>
+
 </html>
