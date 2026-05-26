@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NAF</title>
@@ -15,295 +12,143 @@
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-
-    font-family:'IBM Plex Sans Arabic',sans-serif;
-
-    background:#fafafa;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    padding:20px;
-
+font-family:'IBM Plex Sans Arabic',sans-serif;
+background:#fafafa;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:20px;
 }
-
-/* لوحة التحكم */
 
 .controls{
-
-    width:100%;
-
-    max-width:360px;
-
-    background:white;
-
-    padding:20px;
-
-    border-radius:12px;
-
-    box-shadow:0 4px 15px rgba(0,0,0,0.05);
-
-    margin-bottom:20px;
-
+width:100%;
+max-width:360px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+margin-bottom:20px;
+box-sizing:border-box;
 }
 
-.controls h2{
-
-    text-align:center;
-
-    margin-bottom:15px;
-
-    font-size:20px;
-
-    font-weight:600;
-
-}
-
-input,
-select,
-button{
-
-    width:100%;
-
-    padding:12px;
-
-    margin-bottom:12px;
-
-    border-radius:8px;
-
-    border:1px solid #dcdcdc;
-
-    font-family:inherit;
-
-    font-size:14px;
-
+input,select,button{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border-radius:8px;
+border:1px solid #ccc;
+box-sizing:border-box;
+font-family:inherit;
 }
 
 button{
-
-    background:#1A1A1A;
-
-    color:white;
-
-    border:none;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:0.2s;
-
+background:#1A1A1A;
+color:white;
+border:none;
+font-weight:600;
+cursor:pointer;
 }
-
-button:hover{
-
-    opacity:0.92;
-
-}
-
-/* الكرت */
 
 .card-wrapper{
-
-    width:360px;
-
-    height:600px;
-
-    border-radius:16px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-
+width:360px;
+height:600px;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
-
-/* المنطقة اللي تنحفظ */
 
 #capture-area{
-
-    width:100%;
-
-    height:100%;
-
-    padding:40px 30px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    position:relative;
-
-    transition:0.3s ease;
-
+width:100%;
+height:100%;
+padding:40px 30px;
+box-sizing:border-box;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+align-items:center;
+position:relative;
 }
-
-/* كلاسيك */
 
 .theme-classic{
-
-    background:#F4EBD9;
-
-    color:#1A1A1A;
-
+background:#F4EBD9;
+color:#1A1A1A;
 }
-
-/* مودرن */
 
 .theme-modern{
-
-    background:#1A1A1A;
-
-    color:#F4EBD9;
-
+background:#1A1A1A;
+color:#F4EBD9;
 }
-
-/* الإطار الداخلي */
 
 .inner-frame{
-
-    position:absolute;
-
-    top:15px;
-
-    left:15px;
-
-    right:15px;
-
-    bottom:15px;
-
-    border:1px solid currentColor;
-
-    opacity:0.15;
-
-    border-radius:14px;
-
-    pointer-events:none;
-
+position:absolute;
+top:15px;
+left:15px;
+right:15px;
+bottom:15px;
+border:1px solid currentColor;
+opacity:0.15;
+border-radius:12px;
 }
-
-/* اللوقو */
 
 .logo{
-
-    font-size:28px;
-
-    font-weight:600;
-
-    margin-top:10px;
-
-    z-index:2;
-
+font-size:28px;
+font-weight:600;
+margin-top:10px;
 }
 
-/* المحتوى */
-
 .content{
-
-    text-align:center;
-
-    z-index:2;
-
+text-align:center;
 }
 
 .title{
-
-    font-size:38px;
-
-    margin-bottom:15px;
-
-    font-weight:600;
-
+font-size:38px;
+margin-bottom:15px;
 }
 
 .wish{
-
-    font-size:15px;
-
-    line-height:2;
-
-    font-weight:300;
-
+font-size:15px;
+line-height:2;
 }
-
-/* الاسم */
 
 .name-box{
-
-    width:85%;
-
-    border:1px solid currentColor;
-
-    padding:12px;
-
-    border-radius:30px;
-
-    text-align:center;
-
-    background:rgba(255,255,255,0.03);
-
-    z-index:2;
-
+width:85%;
+border:1px solid currentColor;
+padding:12px;
+border-radius:30px;
+text-align:center;
 }
-
-#display-name{
-
-    font-size:18px;
-
-}
-
-/* الفوتر */
 
 .footer{
-
-    font-size:11px;
-
-    opacity:0.5;
-
-    z-index:2;
-
+font-size:11px;
+opacity:0.5;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- التحكم -->
-
 <div class="controls">
 
-<h2>NAF</h2>
+<h2 style="text-align:center;margin-bottom:15px;">
+NAF
+</h2>
 
 <input
 type="text"
 id="nameInput"
 placeholder="اكتب اسمك هنا..."
-maxlength="30"
 >
 
 <select id="themeSelect">
 
 <option value="classic">
-القالب الكلاسيكي (بيج × أسود)
+القالب الكلاسيكي
 </option>
 
 <option value="modern">
-القالب المودرن (أسود × بيج)
+القالب المودرن
 </option>
 
 </select>
@@ -313,8 +158,6 @@ maxlength="30"
 </button>
 
 </div>
-
-<!-- الكرت -->
 
 <div class="card-wrapper">
 
@@ -334,23 +177,22 @@ NAF
 
 <div class="wish">
 
-<span style="font-weight:600;display:block;margin-bottom:6px;">
+<span style="font-weight:600;">
 كل عام وأنتم بخير
 </span>
 
-تقبل الله منا ومنكم صالح الأعمال<br>
-وجعل أيامكم أفراحاً ومسرات
+<br><br>
+
+تقبل الله منا ومنكم صالح الأعمال
 
 </div>
 
 </div>
 
 <div class="name-box">
-
 <p id="display-name">
 الاسم هنا
 </p>
-
 </div>
 
 <div class="footer">
@@ -362,8 +204,6 @@ NAF
 </div>
 
 <script>
-
-/* العناصر */
 
 const nameInput =
 document.getElementById('nameInput');
@@ -378,109 +218,54 @@ const captureArea =
 document.getElementById('capture-area');
 
 
-/* تحديث الاسم */
+nameInput.addEventListener('input',function(){
 
-nameInput.addEventListener('input', function(){
-
-    const value =
-    nameInput.value.trim();
-
-    if(value === ''){
-
-        displayName.textContent =
-        'الاسم هنا';
-
-    } else {
-
-        displayName.textContent =
-        value;
-
-    }
+displayName.textContent =
+nameInput.value || 'الاسم هنا';
 
 });
 
 
-/* تغيير الثيم */
+themeSelect.addEventListener('change',function(){
 
-themeSelect.addEventListener('change', function(){
+if(themeSelect.value === 'modern'){
 
-    captureArea.classList.remove(
-        'theme-classic'
-    );
+captureArea.classList.remove('theme-classic');
 
-    captureArea.classList.remove(
-        'theme-modern'
-    );
+captureArea.classList.add('theme-modern');
 
-    if(themeSelect.value === 'modern'){
+}else{
 
-        captureArea.classList.add(
-            'theme-modern'
-        );
+captureArea.classList.remove('theme-modern');
 
-    } else {
+captureArea.classList.add('theme-classic');
 
-        captureArea.classList.add(
-            'theme-classic'
-        );
-
-    }
+}
 
 });
 
-
-/* تحميل الصورة */
 
 function downloadImage(){
 
-    html2canvas(captureArea,{
+html2canvas(captureArea,{
+scale:3
+}).then(function(canvas){
 
-        scale:4,
+const link =
+document.createElement('a');
 
-        useCORS:true,
+link.download = 'NAF.png';
 
-        allowTaint:true,
+link.href =
+canvas.toDataURL('image/png');
 
-        backgroundColor:null
+link.click();
 
-    })
-
-    .then(function(canvas){
-
-        const image =
-        canvas.toDataURL('image/png');
-
-        const link =
-        document.createElement('a');
-
-        const userName =
-        nameInput.value.trim() || 'NAF';
-
-        link.href = image;
-
-        link.download =
-        userName + '.png';
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        document.body.removeChild(link);
-
-    })
-
-    .catch(function(error){
-
-        console.log(error);
-
-        alert('صار خطأ بالتحميل');
-
-    });
+});
 
 }
 
 </script>
 
 </body>
-
 </html>
